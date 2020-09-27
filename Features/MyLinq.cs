@@ -16,11 +16,7 @@ namespace Features.Linq
             {
                 count += 1;
             }
-            //IEnumerator<T> enumerator = sequence.GetEnumerator();
-            //while (enumerator.MoveNext())
-            //{
-            //    count++;
-            //}
+
             return count;
         }
     }

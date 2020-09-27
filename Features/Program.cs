@@ -23,12 +23,27 @@ namespace Features
                 new Employee { Id = 3, Name = "Alex" }
             };
 
-            Console.WriteLine(developers.Count());
-            IEnumerator<Employee> enumerator = developers.GetEnumerator();
-            while (enumerator.MoveNext())
+            // Named Method Approach
+            // foreach (var employee in developers.Where(NameStartsWithS)
+
+            // Anonymous Method Approach
+            /*foreach (var employee in developers.Where(
+                delegate (Employee employee)
+                {
+                    return employee.Name.StartsWith("S");
+                }))*/
+
+            // Lamda Expression Approach
+            foreach (var employee in developers.Where(
+                            e => e.Name.StartsWith("S")))
             {
-                Console.WriteLine(enumerator.Current.Name);
+                Console.WriteLine(employee.Name);
             }
+        }
+
+        private static bool NameStartsWithS(Employee employee)
+        {
+            return employee.Name.StartsWith("S");
         }
     }
 }
