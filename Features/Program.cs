@@ -12,6 +12,31 @@ namespace Features
     {
         static void Main(string[] args)
         {
+            // Named Method
+            // Func<int, int> f = Square;
+
+            // Lambda Expression
+            Func<int, int> square = x => x * x;
+            //Func<int, int, int> add = (x, y) => x + y;
+            
+            // Explicit parameter types
+            // Func<int, int, int> add = (int x, int y) => x + y;
+
+            // Full body block in lambda expression
+            Func<int, int, int> add = (x, y) =>
+            { 
+                int temp = x + y;
+                return temp;
+            };
+
+            Action<int> write = x => Console.WriteLine(x);
+
+            // Without action
+            //Console.WriteLine(square(add(3, 5)));
+
+            // Using action
+            write(square(add(3, 5)));
+
             IEnumerable<Employee> developers = new Employee[]
             {
                 new Employee { Id = 1, Name = "Scott" },
@@ -34,11 +59,25 @@ namespace Features
                 }))*/
 
             // Lamda Expression Approach
+            /*
             foreach (var employee in developers.Where(
                             e => e.Name.StartsWith("S")))
             {
                 Console.WriteLine(employee.Name);
             }
+            */
+
+            // Changing the filtering criteria and adding ordering
+            foreach (var employee in developers.Where(e => e.Name.Length == 5)
+                                               .OrderBy(e => e.Name))
+            {
+                Console.WriteLine(employee.Name);
+            }
+        }
+
+        private static int Square(int arg)
+        {
+            throw new NotImplementedException();
         }
 
         private static bool NameStartsWithS(Employee employee)
