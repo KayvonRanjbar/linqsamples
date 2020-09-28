@@ -48,8 +48,17 @@ namespace Features
                 new Employee { Id = 3, Name = "Alex" }
             };
 
+            // Method syntax
             var query = developers.Where(e => e.Name.Length == 5)
-                                  .OrderBy(e => e.Name);
+                                  .OrderByDescending(e => e.Name)
+                                  .Select(e => e);
+
+            // Query syntax
+            var query2 = from developer in developers
+                         where developer.Name.Length == 5
+                         orderby developer.Name descending
+                         select developer;
+            // Operations like Count, Take, and Skip are not available in the query syntax
 
             // Named Method Approach
             // foreach (var employee in developers.Where(NameStartsWithS)
@@ -71,7 +80,7 @@ namespace Features
             */
 
             // Changing the filtering criteria and adding ordering
-            foreach (var employee in query)
+            foreach (var employee in query2)
             {
                 Console.WriteLine(employee.Name);
             }
