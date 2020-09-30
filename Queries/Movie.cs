@@ -11,6 +11,8 @@ namespace Queries
         public int Year
         {   get
             {
+                // Forced exception to display how they work with linq
+                //throw new Exception("Error!");
                 Console.WriteLine($"Returning {_year} for {Title}");
                 return _year;
             }

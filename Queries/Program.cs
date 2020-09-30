@@ -16,20 +16,23 @@ namespace Queries
                 new Movie { Title = "Star Wars V",          Rating = 8.7f, Year = 1980 }
             };
 
-            // method syntax
-            //var query = movies.Where(m => m.Year > 2000);
+            // Try/catch block
+            /*
+            var query = Enumerable.Empty<Movie>();
 
-            // custom filter with deferred execution
-            // var query = movies.Filter(m => m.Year > 2000);
+            try
+            {
+                query = movies.Where(m => m.Year > 2000);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            */
 
-            // no deferred execution
-            var query = movies.Filter(m => m.Year > 2000).ToList();
+            var query = movies.Where(m => m.Year > 2000).ToList();
 
             Console.WriteLine(query.Count());
-            //foreach (var movie in query)
-            //{
-            //    Console.WriteLine(movie.Title);
-            //}
 
             var enumerator = query.GetEnumerator();
             while (enumerator.MoveNext())
