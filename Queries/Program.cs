@@ -19,11 +19,13 @@ namespace Queries
             // method syntax
             //var query = movies.Where(m => m.Year > 2000);
 
-            // custom filter
-            var query = movies.Filter(m => m.Year > 2000);
-            // later
-            query = query.Take(1);
+            // custom filter with deferred execution
+            // var query = movies.Filter(m => m.Year > 2000);
 
+            // no deferred execution
+            var query = movies.Filter(m => m.Year > 2000).ToList();
+
+            Console.WriteLine(query.Count());
             //foreach (var movie in query)
             //{
             //    Console.WriteLine(movie.Title);
