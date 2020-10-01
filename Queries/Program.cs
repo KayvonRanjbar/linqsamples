@@ -16,23 +16,8 @@ namespace Queries
                 new Movie { Title = "Star Wars V",          Rating = 8.7f, Year = 1980 }
             };
 
-            // Try/catch block
-            /*
-            var query = Enumerable.Empty<Movie>();
-
-            try
-            {
-                query = movies.Where(m => m.Year > 2000);
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            */
-
-            var query = movies.Where(m => m.Year > 2000).ToList();
-
-            Console.WriteLine(query.Count());
+            var query = movies.Where(m => m.Year > 2000)
+                              .OrderByDescending(m => m.Rating);
 
             var enumerator = query.GetEnumerator();
             while (enumerator.MoveNext())
