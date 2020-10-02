@@ -13,20 +13,23 @@ namespace Cars
         {
             var cars = ProcessFile("fuel.csv");
 
-            // extension method syntax
-            //var query = cars.OrderByDescending(c => c.Combined)
-            //                .ThenBy(c => c.Name);
-
-            // query syntax
             var query =
                 from car in cars
-                orderby car.Combined ascending, car.Name ascending
+                where car.Manufacturer == "BMW" && car.Year == 2016
+                orderby car.Combined descending, car.Name ascending
                 select car;
 
+            var top =
+                cars.OrderByDescending(c => c.Combined)
+                    .ThenBy(c => c.Name)
+                    .Select(c => c)
+                    .FirstOrDefault(c => c.Manufacturer == "aaa" && c.Year == 2016);
+
+            Console.WriteLine(top.Name);
 
             foreach (var car in query.Take(10))
             {
-                Console.WriteLine($"{car.Name} : {car.Combined}");
+                Console.WriteLine($"{car.Manufacturer} {car.Name} : {car.Combined}");
             }
         }
 
