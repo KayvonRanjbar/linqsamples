@@ -24,13 +24,20 @@ namespace Cars
                     car.Combined
                 };
 
-            var result = cars.Select(c => new { c.Manufacturer,
-                                                c.Name, c.Combined });
+            IEnumerable<char> characters = "Scott";
 
-            foreach (var car in query.Take(10))
+            var result = cars.SelectMany(c => c.Name)
+                             .OrderBy(c => c);
+
+            foreach (var character in result)
             {
-                Console.WriteLine($"{car.Manufacturer} {car.Name} : {car.Combined}");
+                Console.WriteLine(character);
             }
+
+            //foreach (var car in query.Take(10))
+            //{
+            //    Console.WriteLine($"{car.Manufacturer} {car.Name} : {car.Combined}");
+            //}
         }
 
         private static List<Car> ProcessFile(string path)
