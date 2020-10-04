@@ -23,7 +23,7 @@ namespace Cars
 
             var query2 =
                 cars.GroupBy(c => c.Manufacturer.ToUpper())
-                    .OrderBy(m => m.Key);
+                    .OrderBy(g => g.Key);
 
             foreach (var group in query2)
             {
