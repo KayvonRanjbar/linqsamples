@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace Cars
 {
@@ -13,8 +14,29 @@ namespace Cars
     {
         static void Main(string[] args)
         {
-            CreateXml();
-            QueryXml();
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<CarDb>());
+            InsertData();
+            QueryData();
+        }
+
+        private static void QueryData()
+        {
+            
+        }
+
+        private static void InsertData()
+        {
+            var cars = ProcessCars("fuel.csv");
+            var db = new CarDb();
+            
+            if(!db.Cars.Any())
+            {
+                foreach (var car in cars)
+                {
+                    db.Cars.Add(car);
+                }
+                db.SaveChanges();
+            }
         }
 
         private static void QueryXml()
